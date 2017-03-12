@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://bootswatch.com/yeti/bootstrap.min.css" />
+	
+	
+    <title>Map</title>
+    <style>      
+      #mapid {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+  
+ <nav class="navbar navbar-default">
+<div class="navbar-header">
+<a class="navbar-brand" href="index1.html">Shop</a>
+<ul class="nav navbar-nav inline">
+<li><a class="navbar-brand active" href="index2.html">Full Map</a></li>
+</ul>
+</div>
+</nav>
+  
+    <div id="mapid"></div>
+    <script>
+
+
+var map = L.map('mapid').setView([11.036, 77.002], 13);
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Data © <a href="http://osm.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+L.marker([11.036, 77.002]).addTo(map)
+.bindPopup("<b>Headquater</b><br />Come and grab the exclusive offers!").openPopup();
+
+var editableLayers = new L.FeatureGroup();
+map.addLayer(editableLayers);
+
+var drawPluginOptions = {
+  position: 'topright',
+  draw: {
+    polygon: {
+      allowIntersection: true, 
+          },
+    },
+  };
+var drawControl = new L.Control.Draw(drawPluginOptions);
+map.addControl(drawControl);
+
+var editableLayers = new L.FeatureGroup();
+map.addLayer(editableLayers);
+
+map.on('draw:created', function(e) {
+  var type = e.layerType,
+    layer = e.layer;
+  editableLayers.addLayer(layer);
+}
+);
+
+
+
+
+</script>
+   
+  </body>
+</html>
