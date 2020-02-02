@@ -1,6 +1,6 @@
 # Leafletjs-maps
 
-In this project, both editable and uneditable maps has been created with the help of leaftlet.js.
+In this project, both editable and uneditable maps have been created with the help of leaftlet.js.
 
 Screenshot:
 
